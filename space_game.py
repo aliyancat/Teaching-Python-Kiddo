@@ -52,4 +52,91 @@ while running == True:
                 current_bullet = (bullet_x, bullet_y)
                 bullets.append(current_bullet)
 
+
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_LEFT]:
+        ship_x -= ship_speed
+
+    if keys[pygame.K_RIGHT]:
+        ship_x += ship_speed
+
+
+    if ship_x < 0:  # keep it inside the screen
+        ship_x = 0
+
+    if ship_x > width - ship_width:
+        ship_x = width - ship_width
+
+    # spawning the enemies #
+
+    if random.randint(1,40) == 1: 
+        asteroid_x = random.randint(0,width-40)
+        asteroid_y = 0 or -10
+
+        current_asteroid = (asteroid_x, asteroid_y) 
+        asteroids.append(current_asteroid)
+        
+    # moving the bullets #
+
+    for every_bullet in bullets:
+        every_bullet[1] = every_bullet[1] - bullet_speed
+
+
+    #removing the bullets that left the screen #
+
+    active_bullets = []
+
+    for every_bullet in bullets:
+        if every_bullet[1] > 0:
+            active_bullets.append(every_bullet)
+
+    bullets = active_b   ullets
+
+
+    # interaction between asteroids n bullets #
+
+    for every_bullet in bullets:
+        for every_asteroid in asteroids:
+            
+            bullet_x = every_bullet[0]
+            bullet_y = every_bullet[1]
+
+            asteroid_x = every_asteroid[0]
+            asteroid_y = every_asteroid[1]
+
+            if (bullet_x > asteroid_x and bullet_x < asteroid_x + 40) and (bullet_y > asteroid_y and bullet_y < asteroid_y + 40):
+                score += 1
+
+                bullets.remove(every_bullet)
+                asteroids.remove(every_asteroid)
+
+                break
+
+# interaction between the asteroid and the sapceship #
+
+    for every_asteroid in asteroids:
+        asteroid_x = every_asteroid[0]
+        asteroid_y = every_asteroid[1]
+
+        if (ship_x < asteroid_x + 40 and ship_x + ship_width > asteroid_x) and (ship_y < asteroid_y + 40 and ship_y + ship_height > asteroid_y):
+            
+            running = False
+
+        
+
+
+
+    
+
+
+
+
+
+
+
+    
+
+
+
                 
