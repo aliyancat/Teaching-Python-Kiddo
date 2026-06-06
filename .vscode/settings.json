@@ -1,4 +1,5 @@
 {
     "autoGitCopilot.enabled": true,
-    "ollama-autopilot.general.autopilotEnabled": true
+    "ollama-autopilot.general.autopilotEnabled": true,
+    "vscode-autoGit.enabled": true
 }
