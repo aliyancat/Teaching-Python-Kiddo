@@ -137,9 +137,30 @@ while running == True:
         pygame.draw.circle(screen, (128,128,128), (every_asteroid[0]+20, every_asteroid[1]+20), 20)
 
 
+    score_text = font.render("Score: " + str(score) , True, (255,255,255))
+    screen.blit(score_text, (10,10))
+
+    pygame.display.update()
 
 
-    
+game_over_font = pygame.font.SysFont(None, 90)
+
+game_over_text = game_over_font.render("GAME OVER", True, (255,0,0))
+
+final_score = font.render("Final Score: " + str(score), True, (255,255,255))
+
+
+screen.blit(game_over_text,(140,140))
+screen.blit(final_score, (180,220))
+
+
+pygame.display.update()
+pygame.time.delay(3000)
+
+pygame.quit()
+
+
+
 
 
     
