@@ -91,7 +91,7 @@ while running == True:
         if every_bullet[1] > 0:
             active_bullets.append(every_bullet)
 
-    bullets = active_b   ullets
+    bullets = active_bullets
 
 
     # interaction between asteroids n bullets #
@@ -113,7 +113,7 @@ while running == True:
 
                 break
 
-# interaction between the asteroid and the sapceship #
+    # interaction between the asteroid and the sapceship #
 
     for every_asteroid in asteroids:
         asteroid_x = every_asteroid[0]
@@ -123,8 +123,23 @@ while running == True:
             
             running = False
 
-        
 
+    screen.fill((0,0,0))
+    pygame.draw.polygon(screen, (0,255,0), ((ship_x, ship_y + ship_height), (ship_x + ship_width//2, ship_y), (ship_x + ship_width, ship_y + ship_height)))
+
+    
+    for every_bullet in bullets:
+        pygame.draw.rect(screen, (255,0,0), (every_bullet[0], every_bullet[1], 5, 12))
+
+    
+
+    for every_asteroid in asteroids:
+        pygame.draw.circle(screen, (128,128,128), (every_asteroid[0]+20, every_asteroid[1]+20), 20)
+
+
+
+
+    
 
 
     
