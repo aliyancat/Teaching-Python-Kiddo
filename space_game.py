@@ -1,45 +1,36 @@
 import pygame
 import random
 
-
-
 pygame.init()
-
 
 width = 600
 height = 400
 
-
-screen = pygame.display.set_mode((width,height))
+screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 50)
-
 
 ship_width = 50
 ship_height = 30
 
-
-
-ship_x = width//2 - ship_width//2      # x location of the ship
-ship_y = height - 60  # y location of the ship
+ship_x = width // 2 - ship_width // 2
+ship_y = height - 60
 
 ship_speed = 6
 
 bullets = []
 bullet_speed = 6
 
-
 asteroids = []
-asteroids_speed = 3 
-
+asteroids_speed = 3
 
 score = 0
 
 running = True
 
-while running == True:
-    clock.tick(60)
+while running:
 
+    clock.tick(60)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -47,11 +38,9 @@ while running == True:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
-                bullet_x = ship_x + ship_width//2 
+                bullet_x = ship_x + ship_width // 2
                 bullet_y = ship_y
-                current_bullet = (bullet_x, bullet_y)
-                bullets.append(current_bullet)
-
+                bullets.append([bullet_x, bullet_y])
 
     keys = pygame.key.get_pressed()
 
@@ -61,118 +50,110 @@ while running == True:
     if keys[pygame.K_RIGHT]:
         ship_x += ship_speed
 
-
-    if ship_x < 0:  # keep it inside the screen
+    if ship_x < 0:
         ship_x = 0
 
     if ship_x > width - ship_width:
         ship_x = width - ship_width
 
-    # spawning the enemies #
+    if random.randint(1, 40) == 1:
+        asteroid_x = random.randint(0, width - 40)
+        asteroid_y = 0
+        asteroids.append([asteroid_x, asteroid_y])
 
-    if random.randint(1,40) == 1: 
-        asteroid_x = random.randint(0,width-40)
-        asteroid_y = 0 or -10
+    for bullet in bullets:
+        bullet[1] -= bullet_speed
 
-        current_asteroid = (asteroid_x, asteroid_y) 
-        asteroids.append(current_asteroid)
-        
-    # moving the bullets #
+    new_bullets = []
+    for bullet in bullets:
+        if bullet[1] > 0:
+            new_bullets.append(bullet)
 
-    for every_bullet in bullets:
-        every_bullet[1] = every_bullet[1] - bullet_speed
+    bullets = new_bullets
 
+    for asteroid in asteroids:
+        asteroid[1] += asteroids_speed
 
-    #removing the bullets that left the screen #
+    new_asteroids = []
+    for asteroid in asteroids:
+        if asteroid[1] < height:
+            new_asteroids.append(asteroid)
 
-    active_bullets = []
+    asteroids = new_asteroids
 
-    for every_bullet in bullets:
-        if every_bullet[1] > 0:
-            active_bullets.append(every_bullet)
+    for bullet in bullets[:]:
+        for asteroid in asteroids[:]:
 
-    bullets = active_bullets
+            bullet_x = bullet[0]
+            bullet_y = bullet[1]
 
+            asteroid_x = asteroid[0]
+            asteroid_y = asteroid[1]
 
-    # interaction between asteroids n bullets #
+            if (bullet_x > asteroid_x and bullet_x < asteroid_x + 40 and
+                bullet_y > asteroid_y and bullet_y < asteroid_y + 40):
 
-    for every_bullet in bullets:
-        for every_asteroid in asteroids:
-            
-            bullet_x = every_bullet[0]
-            bullet_y = every_bullet[1]
-
-            asteroid_x = every_asteroid[0]
-            asteroid_y = every_asteroid[1]
-
-            if (bullet_x > asteroid_x and bullet_x < asteroid_x + 40) and (bullet_y > asteroid_y and bullet_y < asteroid_y + 40):
                 score += 1
 
-                bullets.remove(every_bullet)
-                asteroids.remove(every_asteroid)
+                if bullet in bullets:
+                    bullets.remove(bullet)
+
+                if asteroid in asteroids:
+                    asteroids.remove(asteroid)
 
                 break
 
-    # interaction between the asteroid and the sapceship #
+    for asteroid in asteroids:
 
-    for every_asteroid in asteroids:
-        asteroid_x = every_asteroid[0]
-        asteroid_y = every_asteroid[1]
+        asteroid_x = asteroid[0]
+        asteroid_y = asteroid[1]
 
-        if (ship_x < asteroid_x + 40 and ship_x + ship_width > asteroid_x) and (ship_y < asteroid_y + 40 and ship_y + ship_height > asteroid_y):
-            
+        if (ship_x < asteroid_x + 40 and
+            ship_x + ship_width > asteroid_x and
+            ship_y < asteroid_y + 40 and
+            ship_y + ship_height > asteroid_y):
+
             running = False
 
+    screen.fill((0, 0, 0))
 
-    screen.fill((0,0,0))
-    pygame.draw.polygon(screen, (0,255,0), ((ship_x, ship_y + ship_height), (ship_x + ship_width//2, ship_y), (ship_x + ship_width, ship_y + ship_height)))
+    pygame.draw.polygon(
+        screen,
+        (0, 255, 0),
+        [
+            (ship_x, ship_y + ship_height),
+            (ship_x + ship_width // 2, ship_y),
+            (ship_x + ship_width, ship_y + ship_height)
+        ]
+    )
 
-    
-    for every_bullet in bullets:
-        pygame.draw.rect(screen, (255,0,0), (every_bullet[0], every_bullet[1], 5, 12))
+    for bullet in bullets:
+        pygame.draw.rect(screen, (255, 0, 0), (bullet[0], bullet[1], 5, 12))
 
-    
+    for asteroid in asteroids:
+        pygame.draw.circle(
+            screen,
+            (128, 128, 128),
+            (asteroid[0] + 20, asteroid[1] + 20),
+            20
+        )
 
-    for every_asteroid in asteroids:
-        pygame.draw.circle(screen, (128,128,128), (every_asteroid[0]+20, every_asteroid[1]+20), 20)
-
-
-    score_text = font.render("Score: " + str(score) , True, (255,255,255))
-    screen.blit(score_text, (10,10))
+    score_text = font.render("Score: " + str(score), True, (255, 255, 255))
+    screen.blit(score_text, (10, 10))
 
     pygame.display.update()
 
+screen.fill((0, 0, 0))
 
 game_over_font = pygame.font.SysFont(None, 90)
 
-game_over_text = game_over_font.render("GAME OVER", True, (255,0,0))
+game_over_text = game_over_font.render("GAME OVER", True, (255, 0, 0))
+final_score = font.render("Final Score: " + str(score), True, (255, 255, 255))
 
-final_score = font.render("Final Score: " + str(score), True, (255,255,255))
-
-
-screen.blit(game_over_text,(140,140))
-screen.blit(final_score, (180,220))
-
+screen.blit(game_over_text, (140, 140))
+screen.blit(final_score, (180, 220))
 
 pygame.display.update()
 pygame.time.delay(3000)
 
 pygame.quit()
-
-
-
-
-
-    
-
-
-
-
-
-
-
-    
-
-
-
-                
