@@ -46,3 +46,35 @@ else:
 #  -> TYPES OF  LOOPS:
 #   1. For Loop -> When we  already know how  many times  it  will repeat
 #   2. While Loop -> Runs until a condition is met
+'''  for loop example
+
+
+     for i  in range(10):
+            print(i)
+
+
+ while  loop example
+
+flag = False
+i = 0
+
+    while Flag == False:
+        i = i   + 1
+        if i  == 10:
+            flag  = True
+
+'''
+
+
+# When we need to repeat certain  code later as  well
+# ----->  Functions
+#Defining the function
+def greet(user):
+    print(f"Hello there {user}")
+    print(f"Welcome to our class")
+    print(f"Hope you have a  great time") 
+
+#calling the  function
+greet("Ali")
+greet("Krish")
+
