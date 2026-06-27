@@ -114,7 +114,7 @@ else:
 
 
 # what if we need to  find  something in an array
-Names = ["Aarav","Eshaan","Aliyan","Krish","Josh"]
+Names = ["Aarav","Eshaan","Aliyan","Krish","Josh","Kate"]
 
 
 #checking if Kate   exists in the names  list
