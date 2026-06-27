@@ -78,3 +78,47 @@ def greet(user):
 greet("Ali")
 greet("Krish")
 
+
+# What  do we use if we need  to compare two numbers/variables
+#---->  Comparision Operators
+# if  age == 10         # equals  comparision
+# if age != 5          #  not equals  to  comparision
+#   >
+#   <
+#  >=
+#  if age <=  9
+
+
+#When we need more than one condition
+# -----> Logical Operators  ( and,  or  ,  not)
+age = 50
+height = 300
+
+if age  > 5 and  height > 100:
+       print("You  are allowed  on the ride")
+else:
+        print("You are not allowed on the ride")
+
+
+'''Write a condition  that  a person  should  be  allowed  a present if  the Maths_Marks are  atleast 70  and ( behavior  is good  or behavior is fine )
+'''
+
+
+math_marks = 80
+behavior = "good"
+
+if   math_marks >= 70 and (behavior == "good" or behavior == "fine"):
+    print("Present  allowed")
+else:
+     print("Present not  allowed")
+
+
+# what if we need to  find  something in an array
+Names = ["Aarav","Eshaan","Aliyan","Krish","Josh"]
+
+
+#checking if Kate   exists in the names  list
+
+
+if "Kate" in  Names:
+     print("Kate is present")
