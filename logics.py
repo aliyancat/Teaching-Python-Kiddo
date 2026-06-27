@@ -122,3 +122,10 @@ Names = ["Aarav","Eshaan","Aliyan","Krish","Josh","Kate"]
 
 if "Kate" in  Names:
      print("Kate is present")
+
+
+
+code =  "SIOAPDOAS923048I32-0virus2309490239SDFNSDFLKSDLKF"
+
+if "virus" in code:
+     print("VIRUS DETECTED. ANTIVIRUS ACTIVATED!")
