@@ -158,3 +158,5 @@ neighbours = ["Ali","Jake","Kate","Matt"]
 print(random.choice(neighbours))
 
 
+#for numbers
+print(random.randint(1,6))
