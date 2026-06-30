@@ -129,3 +129,13 @@ code =  "SIOAPDOAS923048I32-0virus2309490239SDFNSDFLKSDLKF"
 
 if "virus" in code:
      print("VIRUS DETECTED. ANTIVIRUS ACTIVATED!")
+
+
+
+
+# Find how many items in a list
+#--->  len(list)
+
+
+students = ["Ali","Jake","Kate","Matt"]
+print(len(students))
