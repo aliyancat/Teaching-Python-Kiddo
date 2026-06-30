@@ -143,11 +143,11 @@ if len(students) >=  4:
 '''
 
 
-while len(students) <= 10:
+while len(students) < 10:
      print("You can add more people")
      name = input("Enter the person's name") 
      students.append(name)
-     
+
 print(students)
 
 
