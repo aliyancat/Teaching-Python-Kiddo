@@ -1,5 +1,4 @@
-
-
+import random
 #To store something
 #   We use  variables   when  there  is only   one thing  to store
 
@@ -141,13 +140,21 @@ students = ["Ali","Jake","Kate","Matt"]
 if len(students) >=  4:
     print("We have reached  max capacity")
 '''
-
-
+print("\n\n\n\n\n\n")
+'''
 while len(students) < 10:
      print("You can add more people")
      name = input("Enter the person's name") 
      students.append(name)
+ '''
 
-print(students)
+print("\n\n\n\n\n\n")
+
+# random.choice(list) if u wanna pick an item
+#randomly from a  list
+
+neighbours = ["Ali","Jake","Kate","Matt"]
+
+print(random.choice(neighbours))
 
 
