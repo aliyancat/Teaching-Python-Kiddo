@@ -159,4 +159,29 @@ print(random.choice(neighbours))
 
 
 #for numbers
-print(random.randint(1,6))
+print(random.randint(1, 6))
+
+
+#to  add an  item  in  the list
+# list.append(new_item)
+
+
+#to remove  an  item from  the list
+
+#list.remove(item_you_wanna_remove)
+
+
+marks = [10,20,50,60,90]
+
+#to find   the largest number
+
+print(max(marks))
+
+
+#to find  the minimum number
+
+print(min(marks))
+
+#to sum up a  list
+
+print(sum(list))
