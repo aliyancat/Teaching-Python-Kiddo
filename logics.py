@@ -136,6 +136,18 @@ if "virus" in code:
 # Find how many items in a list
 #--->  len(list)
 
-
 students = ["Ali","Jake","Kate","Matt"]
-print(len(students))
+'''
+if len(students) >=  4:
+    print("We have reached  max capacity")
+'''
+
+
+while len(students) <= 10:
+     print("You can add more people")
+     name = input("Enter the person's name") 
+     students.append(name)
+     
+print(students)
+
+
